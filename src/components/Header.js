@@ -1,39 +1,69 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Toolbar from '@mui/material/Toolbar'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import SearchIcon from '@mui/icons-material/Search'
 import Typography from '@mui/material/Typography'
-import Link from '@mui/material/Link'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import IconButton from '@mui/material/IconButton'
+import { useState } from 'react'
 
-function Header(props) {
-  const { title } = props
+function Header() {
+  const [date, setDate] = useState(new Date())
+
+  const daysOfWeek = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ]
+
+  const handlePrevDay = () => {
+    const newDate = new Date(date)
+    newDate.setDate(date.getDate() - 1)
+    setDate(newDate)
+  }
+
+  const handleNextDay = () => {
+    const newDate = new Date(date)
+    newDate.setDate(date.getDate() + 1)
+    setDate(newDate)
+  }
 
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          component="label"
+          onClick={handlePrevDay}
+        >
+          <ArrowBackIosNewIcon />
+        </IconButton>
         <Typography
           component="h2"
-          variant="h5"
+          variant="h4"
           color="inherit"
           align="center"
           noWrap
           sx={{ flex: 1 }}
         >
-          {title}
+          {daysOfWeek[date.getDay()]} {date.toLocaleDateString()}
         </Typography>
 
-        {/* <Button variant="outlined" size="small">
-          Sign up
-        </Button> */}
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          component="label"
+          onClick={handleNextDay}
+        >
+          <ArrowForwardIosIcon />
+        </IconButton>
       </Toolbar>
     </React.Fragment>
   )
-}
-
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
 }
 
 export default Header
