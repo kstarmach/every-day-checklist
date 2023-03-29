@@ -1,31 +1,24 @@
 const router = require('express').Router()
-
-let todos = [
-    {
-        id: 1,
-        text: 'cos zrobic',
-        done: false
-    },
-    {
-        id: 2,
-        text: 'coz zrobione',
-        done: true
-    },
-    {
-        id: 3,
-        text: '😊😂🤣',
-        done: true
-    },
-    {
-        id: 4,
-        text: 'wtf',
-        done: false
-    }
-]
+const { Todo } = require('../mongo')
 
 router.get('/', async (_, res) => {
+    const todos = await Todo.find({})
     await res.send(todos)
 })
+
+router.post('/', async (req, res) => {
+    if (!req.body.text) {
+        res.status(400).json({ error: 'text cannot be empty' })
+    }
+
+    const todo = await Todo.create({
+        text: req.body.text,
+        done: false
+    })
+
+    res.send(todo)
+})
+
 
 
 module.exports = router
