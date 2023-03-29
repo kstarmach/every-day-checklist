@@ -33,7 +33,7 @@ function Header() {
 
   return (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Toolbar sx={{ marginBottom: '5px' }}>
         <IconButton
           color="primary"
           aria-label="upload picture"
