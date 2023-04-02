@@ -19,6 +19,14 @@ const TodoView = () => {
         setTodos([...todos, data])
     }
 
+    const updateTodo = async (todo) => {
+        await axios.put(`/todos/${todo.id}`, {
+            text: todo.text,
+            done: !todo.done
+        })
+        getTodos()
+    }
+
     useEffect(() => {
         getTodos()
     }, [])
@@ -27,7 +35,7 @@ const TodoView = () => {
         <Grid container direction="column" style={{ height: "98vh" }}>
             <Grid item xs>
                 <Calendar />
-                <List todos={todos} />
+                <List todos={todos} updateTodo={updateTodo} />
             </Grid>
             <Grid item>
                 <AddTodo createTodo={createTodo} />

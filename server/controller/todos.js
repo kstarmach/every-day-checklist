@@ -13,12 +13,28 @@ router.post('/', async (req, res) => {
 
     const todo = await Todo.create({
         text: req.body.text,
-        done: false
+        done: false,
+        createDate: new Date()
     })
 
     res.send(todo)
 })
 
 
+router.put('/:id', async (req, res) => {
+    const { id } = req.params
+
+    const todo = await Todo.findById(id)
+    if (!todo) return res.sendStatus(404)
+
+    if (req.body.text) {
+        todo.text = req.body.text
+        todo.done = req.body.done ?? false
+        todo.updateDate = new Date()
+    }
+
+    const updatedTodo = await todo.save()
+    res.send(updatedTodo)
+})
 
 module.exports = router

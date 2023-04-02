@@ -1,9 +1,7 @@
-const { PORT } = require('./util/config')
-
 const express = require('express')
 const cors = require('cors');
 
-const todosRouter = require('./routes/todos')
+const todosRouter = require('./controller/todos')
 
 const app = express()
 
