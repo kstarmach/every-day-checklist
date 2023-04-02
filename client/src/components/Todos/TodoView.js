@@ -1,6 +1,10 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import List from "./List"
+import AddTodo from "./AddTodo"
+import { Grid } from "@mui/material"
+import Calendar from "./Calendar"
+
 
 const TodoView = () => {
     const [todos, setTodos] = useState([])
@@ -10,12 +14,26 @@ const TodoView = () => {
         setTodos(data)
     }
 
+    const createTodo = async (todo) => {
+        const { data } = await axios.post('/todos', todo)
+        setTodos([...todos, data])
+    }
+
     useEffect(() => {
         getTodos()
     }, [])
 
     return (
-        <List todos={todos} />
+        <Grid container direction="column" style={{ height: "98vh" }}>
+            <Grid item xs>
+                <Calendar />
+                <List todos={todos} />
+            </Grid>
+            <Grid item>
+                <AddTodo createTodo={createTodo} />
+            </Grid>
+        </Grid>
+
     )
 }
 
