@@ -5,6 +5,7 @@ import AddTodo from "./AddTodo"
 import { Grid } from "@mui/material"
 import Calendar from "./Calendar"
 
+import DoneList from "./DoneList"
 
 const TodoView = () => {
     const [todos, setTodos] = useState([])
@@ -35,7 +36,9 @@ const TodoView = () => {
         <Grid container direction="column" style={{ height: "98vh" }}>
             <Grid item xs>
                 <Calendar />
-                <List todos={todos} updateTodo={updateTodo} />
+                <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} />
+
+                <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} />
             </Grid>
             <Grid item>
                 <AddTodo createTodo={createTodo} />
