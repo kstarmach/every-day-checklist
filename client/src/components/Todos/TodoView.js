@@ -33,13 +33,7 @@ const TodoView = () => {
     }, [])
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '98vh',
-            }}
-        >
+        <Box sx={{ pb: 7 }}>
             <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="md">
                 <Calendar />
                 <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} />
@@ -48,17 +42,12 @@ const TodoView = () => {
             </Container>
             <Box
                 component="footer"
-                sx={{
-                    py: 3,
-                    px: 2,
-                    mt: 'auto',
-                }}
+                sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, py: 3, px: 2 }}
             >
-                <Container maxWidth="md">
+                <Container maxWidth="sm">
                     <AddTodo createTodo={createTodo} />
                 </Container>
             </Box>
-
         </Box>
     )
 }
