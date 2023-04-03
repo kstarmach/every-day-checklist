@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import List from "./List"
 import AddTodo from "./AddTodo"
-import { Grid } from "@mui/material"
+import { Box, Container } from "@mui/material"
 import Calendar from "./Calendar"
 
 import DoneList from "./DoneList"
@@ -33,18 +33,33 @@ const TodoView = () => {
     }, [])
 
     return (
-        <Grid container direction="column" style={{ height: "98vh" }}>
-            <Grid item xs>
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '98vh',
+            }}
+        >
+            <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="md">
                 <Calendar />
                 <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} />
 
                 <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} />
-            </Grid>
-            <Grid item>
-                <AddTodo createTodo={createTodo} />
-            </Grid>
-        </Grid>
+            </Container>
+            <Box
+                component="footer"
+                sx={{
+                    py: 3,
+                    px: 2,
+                    mt: 'auto',
+                }}
+            >
+                <Container maxWidth="md">
+                    <AddTodo createTodo={createTodo} />
+                </Container>
+            </Box>
 
+        </Box>
     )
 }
 

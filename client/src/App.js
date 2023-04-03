@@ -3,11 +3,9 @@ import TodoView from './components/Todos/TodoView'
 
 function App() {
   return (
-    <div>
-      <Container>
+      <Container  >
         <TodoView />
       </Container>
-    </div>
   )
 }
 
