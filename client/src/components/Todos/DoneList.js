@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Todo from "./Todo"
 
 const DoneList = ({ todos, updateTodo }) => {
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
 
     const handleClick = () => {
         setShow(!show)

@@ -12,55 +12,129 @@ import MenuList from '@mui/material/MenuList';
 import Typography from '@mui/material/Typography';
 import ContentCopy from '@mui/icons-material/ContentCopy';
 
-const ContextMenu = () => {
-    return (
-        <MenuList sx={{ width: 300, maxWidth: '100%' }}>
-            <MenuItem>
-                <ListItemIcon>
-                    <CheckCircleOutlineIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Mark as complete</ListItemText>
-            </MenuItem>
-            <Divider />
-            <MenuItem>
-                <ListItemIcon>
-                    <EditIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Edit</ListItemText>
-                <Typography variant="body2" color="text.secondary">
-                    ⌘X
-                </Typography>
-            </MenuItem>
-            <MenuItem>
-                <ListItemIcon>
-                    <ContentCopy fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Copy</ListItemText>
-                <Typography variant="body2" color="text.secondary">
-                    ⌘C
-                </Typography>
-            </MenuItem>
-            <MenuItem>
-                <ListItemIcon>
-                    <ArchiveIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Archive</ListItemText>
-                <Typography variant="body2" color="text.secondary">
-                    ⌘V
-                </Typography>
-            </MenuItem>
-            <Divider />
-            <MenuItem sx={{ color: 'red' }}>
-                <ListItemIcon sx={{ color: 'red' }}>
-                    <DeleteForeverIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Delete task</ListItemText>
-                <Typography variant="body2" color="text.secondary">
-                    Delete
-                </Typography>
-            </MenuItem>
 
-        </MenuList>
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+
+const AlertDialog = ({ handleClose, open, taskName, handleDelete }) => {
+
+
+    return (
+        <div>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Delete task?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Task "{taskName}" will be deleted pernamently!
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDelete} color={'error'}>Delete</Button>
+                    <Button onClick={handleClose} autoFocus>
+                        Cancel
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
+}
+
+const ContextMenu = ({ todo, updateTodo, handleCloseContextMenu }) => {
+    const [open, setOpen] = useState(false)
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = () => {
+        console.log('Clicked delete');
+        setOpen(false);
+        handleCloseContextMenu()
+    }
+
+    const handleSetComplete = () => {
+        updateTodo(todo)
+    }
+
+
+
+    return (
+        <>
+            <MenuList sx={{ width: 300, maxWidth: '100%' }}>
+                {!todo.done ?
+                    <MenuItem onClick={handleSetComplete}>
+                        <ListItemIcon>
+                            <CheckCircleOutlineIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText>Mark as complete</ListItemText>
+                    </MenuItem>
+                    :
+                    <MenuItem onClick={handleSetComplete}>
+                        <ListItemIcon>
+                            <RadioButtonUncheckedIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText>Mark as not complete</ListItemText>
+                    </MenuItem>
+                }
+                <Divider />
+                <MenuItem>
+                    <ListItemIcon>
+                        <EditIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Edit</ListItemText>
+                    <Typography variant="body2" color="text.secondary">
+                        ⌘X
+                    </Typography>
+                </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <ContentCopy fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Copy</ListItemText>
+                    <Typography variant="body2" color="text.secondary">
+                        ⌘C
+                    </Typography>
+                </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <ArchiveIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Archive</ListItemText>
+                    <Typography variant="body2" color="text.secondary">
+                        ⌘V
+                    </Typography>
+                </MenuItem>
+                <Divider />
+                <MenuItem sx={{ color: 'red' }} onClick={handleClickOpen}>
+                    <ListItemIcon sx={{ color: 'red' }}>
+                        <DeleteForeverIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Delete task</ListItemText>
+                    <Typography variant="body2" color="text.secondary">
+                        Delete
+                    </Typography>
+                </MenuItem>
+
+            </MenuList>
+            <AlertDialog handleClose={handleClose} open={open} taskName={todo.text} handleDelete={handleDelete} />
+        </>
     )
 }
 
@@ -87,7 +161,7 @@ const Todo = ({ todo, updateTodo }) => {
         );
     };
 
-    const handleClose = () => {
+    const handleCloseContextMenu = () => {
         setContextMenu(null);
     }
 
@@ -124,7 +198,7 @@ const Todo = ({ todo, updateTodo }) => {
 
             <Menu
                 open={contextMenu !== null}
-                onClose={handleClose}
+                onClose={handleCloseContextMenu}
                 anchorReference="anchorPosition"
                 anchorPosition={
                     contextMenu !== null
@@ -132,7 +206,7 @@ const Todo = ({ todo, updateTodo }) => {
                         : undefined
                 }
             >
-                <ContextMenu />
+                <ContextMenu todo={todo} updateTodo={updateTodo} handleCloseContextMenu={handleCloseContextMenu} />
             </Menu>
         </Paper>
 
