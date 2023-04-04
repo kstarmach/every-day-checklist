@@ -7,9 +7,10 @@ router.get('/', async (_, res) => {
 })
 
 router.post('/', async (req, res) => {
-    if (!req.body.text) {
-        res.status(400).json({ error: 'text cannot be empty' })
+    if (!req.body.text || !req.body.text.trim()) {
+        return res.status(400).send("Input value cannot be empty or contain only whitespaces");
     }
+
 
     const todo = await Todo.create({
         text: req.body.text,

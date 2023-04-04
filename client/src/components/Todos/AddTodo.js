@@ -4,11 +4,18 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 
-const AddTodo = ({createTodo}) => {
+const AddTodo = ({ createTodo }) => {
     const [text, setText] = useState('')
+
     const onChange = ({ target }) => {
-        setText(target.value)
+        const value = target.value
+        if (!value.trim()) {
+            setText('')
+            return;
+        }
+        setText(value)
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -32,6 +39,8 @@ const AddTodo = ({createTodo}) => {
                 inputProps={{ 'aria-label': 'Add a task' }}
                 onChange={onChange}
                 value={text}
+                required
+                pattern=".*\S+.*"
             />
         </Paper>
     )
