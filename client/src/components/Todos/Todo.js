@@ -51,7 +51,7 @@ const AlertDialog = ({ handleClose, open, taskName, handleDelete }) => {
     );
 }
 
-const ContextMenu = ({ todo, updateTodo, handleCloseContextMenu }) => {
+const ContextMenu = ({ todo, updateTodo,deleteTodo, handleCloseContextMenu  }) => {
     const [open, setOpen] = useState(false)
 
 
@@ -64,7 +64,7 @@ const ContextMenu = ({ todo, updateTodo, handleCloseContextMenu }) => {
     };
 
     const handleDelete = () => {
-        console.log('Clicked delete');
+        deleteTodo(todo)
         setOpen(false);
         handleCloseContextMenu()
     }
@@ -138,12 +138,13 @@ const ContextMenu = ({ todo, updateTodo, handleCloseContextMenu }) => {
     )
 }
 
-const Todo = ({ todo, updateTodo }) => {
+const Todo = ({ todo, updateTodo, deleteTodo }) => {
     const [contextMenu, setContextMenu] = useState(null)
 
     const handleToggle = () => {
         updateTodo(todo)
     }
+
 
 
     const handleContextMenu = (event) => {
@@ -206,7 +207,7 @@ const Todo = ({ todo, updateTodo }) => {
                         : undefined
                 }
             >
-                <ContextMenu todo={todo} updateTodo={updateTodo} handleCloseContextMenu={handleCloseContextMenu} />
+                <ContextMenu todo={todo} updateTodo={updateTodo} handleCloseContextMenu={handleCloseContextMenu} deleteTodo={deleteTodo}/>
             </Menu>
         </Paper>
 

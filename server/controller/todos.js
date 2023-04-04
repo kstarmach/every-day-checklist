@@ -37,4 +37,12 @@ router.put('/:id', async (req, res) => {
     res.send(updatedTodo)
 })
 
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params
+
+    await Todo.findByIdAndDelete(id)
+
+    res.sendStatus(200)
+})
+
 module.exports = router

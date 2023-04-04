@@ -4,7 +4,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useState } from 'react';
 import Todo from "./Todo"
 
-const DoneList = ({ todos, updateTodo }) => {
+const DoneList = ({ todos, updateTodo, deleteTodo }) => {
     const [show, setShow] = useState(false)
 
     const handleClick = () => {
@@ -24,7 +24,7 @@ const DoneList = ({ todos, updateTodo }) => {
             />
 
             {show && todos.map((todo) => {
-                return (<Todo todo={todo} updateTodo={updateTodo} key={todo.id} />)
+                return (<Todo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} key={todo.id} />)
             })}
         </>
     )}

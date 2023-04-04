@@ -28,6 +28,11 @@ const TodoView = () => {
         getTodos()
     }
 
+    const deleteTodo = async (todo) => {
+        await axios.delete(`/todos/${todo.id}`)
+        getTodos()
+    }
+
     useEffect(() => {
         getTodos()
     }, [])
@@ -36,9 +41,9 @@ const TodoView = () => {
         <Box sx={{ pb: 7 }}>
             <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="md">
                 <Calendar />
-                <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} />
+                <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
 
-                <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} />
+                <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
             </Container>
             <Box
                 component="footer"

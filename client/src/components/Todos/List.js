@@ -1,10 +1,10 @@
 import Todo from "./Todo"
 
-const List = ({ todos, updateTodo }) => {
+const List = ({ todos, updateTodo, deleteTodo }) => {
     return (
         <>
             {todos.map((todo) => {
-                return (<Todo todo={todo} updateTodo={updateTodo} key={todo.id}/>)
+                return (<Todo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} key={todo.id}/>)
             })}
         </>
     )
