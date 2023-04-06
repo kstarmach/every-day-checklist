@@ -39,7 +39,7 @@ const TodoView = () => {
 
     return (
         <Box sx={{ pb: 7 }}>
-            <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="md">
+            <Container component="main" sx={{  mb: 2 }} maxWidth="md">
                 <Calendar />
                 <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
 

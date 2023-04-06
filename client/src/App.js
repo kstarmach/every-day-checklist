@@ -1,11 +1,13 @@
 import { Container } from '@mui/material'
 import TodoView from './components/Todos/TodoView'
+import Sidebar from './components/Sidebar/Sidebar'
 
 function App() {
   return (
-      <Container  >
-        <TodoView />
-      </Container>
+    <Container >
+      <Sidebar />
+      <TodoView />
+    </Container>
   )
 }
 
