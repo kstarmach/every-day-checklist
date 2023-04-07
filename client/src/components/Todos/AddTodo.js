@@ -24,10 +24,12 @@ const AddTodo = ({ createTodo }) => {
     }
 
     return (
+
         <Paper
             component="form"
             sx={{ display: 'flex', alignItems: 'center', width: '100%' }}
             onSubmit={handleSubmit}
+            elevation={3}
         >
             <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions" type='submit'>
                 <AddIcon />
@@ -43,6 +45,7 @@ const AddTodo = ({ createTodo }) => {
                 pattern=".*\S+.*"
             />
         </Paper>
+
     )
 }
 

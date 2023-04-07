@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import List from "./List"
 import AddTodo from "./AddTodo"
-import { Box, Container } from "@mui/material"
+import { Box } from "@mui/material"
 import Calendar from "./Calendar"
 
 import DoneList from "./DoneList"
@@ -38,21 +38,17 @@ const TodoView = () => {
     }, [])
 
     return (
-        <Box sx={{ pb: 7 }}>
-            <Container component="main" sx={{  mb: 2 }} maxWidth="md">
-                <Calendar />
-                <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+        <Box component="main"
+            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${300}px)` } }}>
 
-                <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
-            </Container>
-            <Box
-                component="footer"
-                sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, py: 3, px: 2 }}
-            >
-                <Container maxWidth="sm">
-                    <AddTodo createTodo={createTodo} />
-                </Container>
-            </Box>
+            <Calendar />
+
+            <AddTodo createTodo={createTodo} />
+            <br/>
+            <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+
+            <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+
         </Box>
     )
 }
