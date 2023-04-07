@@ -27,7 +27,8 @@ const AddTodo = ({ createTodo }) => {
 
         <Paper
             component="form"
-            sx={{ display: 'flex', alignItems: 'center', width: '100%' }}
+            // sx={{ display: 'flex', alignItems: 'center', width: '100%' }}
+            // sx={{ position: 'absolute', bottom: 0, marginBottom: '10px' }}
             onSubmit={handleSubmit}
             elevation={3}
         >
@@ -43,6 +44,7 @@ const AddTodo = ({ createTodo }) => {
                 value={text}
                 required
                 pattern=".*\S+.*"
+    
             />
         </Paper>
 

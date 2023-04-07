@@ -6,6 +6,12 @@ body,
     padding: 0;
 }
 
-body {
+/* body {
     background-color: #d4bff9;
+} */
+
+body {
+    background-image: url("https://w.wallhaven.cc/full/45/wallhaven-45wvk8.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }

@@ -43,7 +43,7 @@ const Calendar = () => {
       <Typography
         component="h2"
         variant="h4"
-        color="inherit"
+        color="white"
         align="center"
         noWrap
         sx={{ flex: 1 }}

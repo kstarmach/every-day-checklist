@@ -44,7 +44,7 @@ const TodoView = () => {
             <Calendar />
 
             <AddTodo createTodo={createTodo} />
-            <br/>
+            <br />
             <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
 
             <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />

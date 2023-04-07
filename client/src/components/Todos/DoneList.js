@@ -12,23 +12,25 @@ const DoneList = ({ todos, updateTodo, deleteTodo }) => {
     };
 
     const icon = show ? <ExpandMoreIcon /> : <NavigateNextIcon />
-    if(todos.length > 0){
-    return (
-        <>
-            <Chip
-                label={`Completed ${todos.length}`}
-                size="small"
-                onClick={handleClick}
-                icon={icon}
-                sx={{ margin: '10px 0' }}
-            />
+    if (todos.length > 0) {
+        return (
+            <>
+                <Chip
+                    label={`Completed ${todos.length}`}
+                    size="small"
+                    onClick={handleClick}
+                    icon={icon}
+                    sx={{ margin: '10px 0' }}
+                    color="primary"
+                />
 
-            {show && todos.map((todo) => {
-                return (<Todo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} key={todo.id} />)
-            })}
-        </>
-    )}
-    return(<></>)
+                {show && todos.map((todo) => {
+                    return (<Todo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} key={todo.id} />)
+                })}
+            </>
+        )
+    }
+    return (<></>)
 }
 
 export default DoneList
