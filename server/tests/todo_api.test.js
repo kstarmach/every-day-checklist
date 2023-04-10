@@ -31,6 +31,21 @@ describe('HTTP GET', () => {
     })
 })
 
+describe('HTTP POST', () => {
+    test('Posting body with all params returns json with id', async () => {
+        const todo = {
+            text: 'random new todo',
+            done: 'false'
+        }
+
+        const response = await api.post('/api/todos').send(todo)
+
+        expect(response.body).toHaveProperty('text', 'random new todo')
+        expect(response.body).toHaveProperty('createDate')
+        expect(response.status).toBe(200)
+    })
+})
+
 
 afterAll(() => {
     mongoose.connection.close()
