@@ -18,6 +18,12 @@ const initialTodos = [
     }
 ]
 
+const todoInDb = async () => {
+    const todos = await Todo.find({})
+    return todos.map(todo => todo.toJSON())
+}
+
 module.exports = {
-    initialTodos
+    initialTodos,
+    todoInDb
 }

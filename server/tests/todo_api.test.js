@@ -44,6 +44,30 @@ describe('HTTP POST', () => {
         expect(response.body).toHaveProperty('createDate')
         expect(response.status).toBe(200)
     })
+
+    test('posting empty body return error and status 400', async () => {
+        const response = await api.post('/api/todos').send({})
+
+        expect(response.status).toBe(400)
+        expect(response.body).toHaveProperty('error')
+    })
+})
+
+describe('HTTP PUT', () => {
+    test('Updating status returns todo', async () => {
+        const todosAtStart = await helper.todoInDb()
+        const firstTodo = todosAtStart[0]
+        firstTodo.done = !firstTodo.done
+
+        const response = await api
+            .put(`/api/todos/${firstTodo.id}`)
+            .send(firstTodo)
+            .expect(200)
+
+
+        expect(response.body.text).toEqual("My first task")
+        expect(response.body.done).toBe(true)
+    })
 })
 
 

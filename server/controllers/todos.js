@@ -8,7 +8,7 @@ router.get('/', async (_, res) => {
 
 router.post('/', async (req, res) => {
     if (!req.body.text || !req.body.text.trim()) {
-        return res.status(400).send("Input value cannot be empty or contain only whitespaces");
+        return res.status(400).send({ error: "Input value cannot be empty or contain only whitespaces" });
     }
 
 
@@ -35,7 +35,7 @@ router.put('/:id', async (req, res) => {
     }
 
     const updatedTodo = await todo.save()
-    res.send(updatedTodo)
+    res.status(200).send(updatedTodo)
 })
 
 router.delete('/:id', async (req, res) => {
