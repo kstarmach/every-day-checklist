@@ -32,7 +32,7 @@ describe('HTTP GET', () => {
 })
 
 describe('HTTP POST', () => {
-    test('Posting body with all params returns json with id', async () => {
+    test('posting body with all params returns json with id', async () => {
         const todo = {
             text: 'random new todo',
             done: 'false'
@@ -54,7 +54,7 @@ describe('HTTP POST', () => {
 })
 
 describe('HTTP PUT', () => {
-    test('Updating status returns todo', async () => {
+    test('succesfully updating status return updated todo', async () => {
         const todosAtStart = await helper.todoInDb()
         const firstTodo = todosAtStart[0]
         firstTodo.done = !firstTodo.done
@@ -67,6 +67,36 @@ describe('HTTP PUT', () => {
 
         expect(response.body.text).toEqual("My first task")
         expect(response.body.done).toBe(true)
+    })
+})
+
+describe('HTTP DELETE', () => {
+    test('correct id should remove todo and return ok', async () => {
+        const todosAtStart = await helper.todoInDb()
+        const firstTodo = todosAtStart[0]
+
+        await api
+            .delete(`/api/todos/${firstTodo.id}`)
+            .expect(200)
+
+        const todosAtEnd = await helper.todoInDb()
+
+        expect(todosAtEnd).toHaveLength(helper.initialTodos.length - 1)
+        expect(todosAtEnd).not.toContainEqual(firstTodo)
+    })
+
+    test('wrong id should return 404', async () => {
+        const todosAtStart = await helper.todoInDb()
+        const firstTodo = todosAtStart[0]
+
+        await api
+            .delete(`/api/todos/642c139d5439c34c75961cba`)
+            .expect(404)
+
+        const todosAtEnd = await helper.todoInDb()
+
+        expect(todosAtEnd).toHaveLength(helper.initialTodos.length)
+        expect(todosAtEnd).toContainEqual(firstTodo)
     })
 })
 
