@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
+import mongoose, { Model, Schema } from 'mongoose';
+import { TodoDocument, Todo } from '../utils/types';
 
-const todoSchema = new mongoose.Schema({
+const todoSchema = new Schema<Todo>({
     text: {
         type: String,
         required: true
@@ -25,13 +26,13 @@ const todoSchema = new mongoose.Schema({
 })
 
 todoSchema.set('toJSON', {
-    transform: (_document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString()
+    transform: (_document: any, returnedObject: TodoDocument) => {
+        returnedObject.id = returnedObject._id ? returnedObject._id.toString() : ''
         delete returnedObject._id
         delete returnedObject.__v
     }
 })
 
-const Todo = mongoose.model('Todo', todoSchema)
+const Todo: Model<Todo> = mongoose.model<Todo>('Todo', todoSchema);
 
-module.exports = Todo
+export default Todo

@@ -1,4 +1,4 @@
-const Todo = require('../models/todo')
+import todoService from "../services/todoService"
 
 const initialTodos = [
     {
@@ -18,9 +18,11 @@ const initialTodos = [
     }
 ]
 
+
 const todoInDb = async () => {
-    const todos = await Todo.find({})
-    return todos.map(todo => todo.toJSON())
+    const todos = await todoService.getAllTodos()
+    //const todos = await Todo.find({})
+    return todos
 }
 
 module.exports = {

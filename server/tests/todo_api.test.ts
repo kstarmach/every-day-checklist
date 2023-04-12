@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
-const app = require('../app')
+// const app = require('../app')
+import app from '../app'
 
 const api = supertest(app)
 
@@ -12,7 +13,7 @@ beforeEach(async () => {
 
     for (let todo of helper.initialTodos) {
         let todoObject = new Todo(todo)
-        const newTodo = await todoObject.save()
+        await todoObject.save()
     }
 })
 
