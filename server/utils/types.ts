@@ -16,4 +16,4 @@ export interface TodoDocument extends Todo {
 
 
 export type NewTodo =
-    | Omit<Todo, "id">
+    | Omit<Todo, "id">;

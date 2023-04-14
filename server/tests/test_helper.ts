@@ -1,4 +1,4 @@
-import todoService from "../services/todoService"
+import todoService from "../services/todoService";
 
 const initialTodos = [
     {
@@ -16,16 +16,16 @@ const initialTodos = [
         done: true,
         createDate: new Date()
     }
-]
+];
 
 
 const todoInDb = async () => {
-    const todos = await todoService.getAllTodos()
+    const todos = await todoService.getAllTodos();
     //const todos = await Todo.find({})
-    return todos
-}
+    return todos;
+};
 
 module.exports = {
     initialTodos,
     todoInDb
-}
+};
