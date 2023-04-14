@@ -1,62 +1,51 @@
 import todoService from "../services/todoService"
-// import { Todo } from "../utils/types"
-
 import express from 'express';
+import toNewTodo from '../utils'
 const router = express.Router();
-// const Todo = require('../models/todo')
 
 router.get('/', async (_, res) => {
-    //const todos = await Todo.find({})
     const todos = await todoService.getAllTodos()
-    //console.log(todos);
-    
     res.send(todos)
 })
 
-// router.post('/', async (req, res) => {
-//     if (!req.body.text || !req.body.text.trim()) {
-//         return res.status(400).send({ error: "Input value cannot be empty or contain only whitespaces" });
-//     }
+router.get('/:id', async (req, res) => {
+    const todo = await todoService.getTodoById(req.params.id)
+    res.json(todo)
+})
+
+router.post('/', async (req, res) => {
+    try {
+        const newTodo = toNewTodo(req.body)
+        const addTodo = await todoService.addTodo(newTodo)
+        res.json(addTodo)
+    }
+    catch (error) {
+        res.status(400).send({ error: 'Input value cannot be empty or contain only whitespaces' });
+    }
+
+})
 
 
-//     const todo = await Todo.create({
-//         text: req.body.text,
-//         done: false,
-//         createDate: new Date()
-//     })
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedTodo = await todoService.updateTodo(req.params.id, req.body)
+        res.status(200).send(updatedTodo)
+    }
+    catch (error) {
+        res.status(400).send({ error: 'Something went wrong here!' })
+    }
+})
 
-//     res.send(todo)
-// })
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const result = await todoService.deleteTodo(req.params.id)
 
-// router.put('/:id', async (req, res) => {
-//     const { id } = req.params
+        res.status(result.status).send(result.message)
+    } catch (err) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
 
-//     const todo = await Todo.findById(id)
-//     if (!todo) return res.sendStatus(404)
-
-//     if (req.body.text) {
-//         todo.text = req.body.text
-//         todo.done = req.body.done ?? false
-//         todo.updateDate = new Date()
-//     }
-
-//     const updatedTodo = await todo.save()
-//     res.status(200).send(updatedTodo)
-// })
-
-// router.delete('/:id', async (req, res) => {
-//     const { id } = req.params
-//     try {
-//         const todo = await Todo.findByIdAndDelete(id)
-//         if (!todo) { return res.status(404).json({ message: "Todo not found" }) }
-
-//         res.sendStatus(200)
-
-//     } catch (err) {
-//         return res.status(500).json({ message: 'Internal server error' });
-//     }
-
-// })
+})
 
 export default router

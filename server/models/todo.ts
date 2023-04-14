@@ -33,6 +33,6 @@ todoSchema.set('toJSON', {
     }
 })
 
-const Todo: Model<Todo> = mongoose.model<Todo>('Todo', todoSchema);
+const TodoModel: Model<Todo> = mongoose.model<Todo>('Todo', todoSchema);
 
-export default Todo
+export default TodoModel

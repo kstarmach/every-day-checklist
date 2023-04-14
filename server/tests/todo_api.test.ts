@@ -5,14 +5,14 @@ import app from '../app'
 
 const api = supertest(app)
 
-const Todo = require('../models/todo')
+import TodoModel from "../models/todo";
 const helper = require('./test_helper')
 
 beforeEach(async () => {
-    await Todo.deleteMany({})
+    await TodoModel.deleteMany()
 
     for (let todo of helper.initialTodos) {
-        let todoObject = new Todo(todo)
+        let todoObject = new TodoModel(todo)
         await todoObject.save()
     }
 })
@@ -29,6 +29,21 @@ describe('HTTP GET', () => {
         const response = await api.get('/api/todos')
 
         expect(response.body).toHaveLength(3)
+    })
+
+    test('geting todo by id should return single todo', async () => {
+        const todoAtStart = await helper.todoInDb()
+        const firstTodo = todoAtStart[0]
+        const response = await api.get(`/api/todos/${firstTodo.id}`)
+
+
+        expect(response.body.text).toEqual(firstTodo.text)
+    })
+
+    test('wrong id should return message about that error', async () => {
+        const response = await api.get(`/api/todos/6439cefe3c133a2671841489`)
+
+        expect(response.body).toEqual("Todo not found!")
     })
 })
 
