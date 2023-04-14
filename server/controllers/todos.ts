@@ -1,19 +1,19 @@
 import todoService from "../services/todoService";
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import toNewTodo from '../utils';
 const router = express.Router();
 
-router.get('/', async (_, res) => {
+router.get('/', (async (_, res) => {
     const todos = await todoService.getAllTodos();
     res.send(todos);
-});
+}) as RequestHandler);
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', (async (req, res) => {
     const todo = await todoService.getTodoById(req.params.id);
     res.json(todo);
-});
+}) as RequestHandler);
 
-router.post('/', async (req, res) => {
+router.post('/', (async (req, res) => {
     try {
         const newTodo = toNewTodo(req.body);
         const addTodo = await todoService.addTodo(newTodo);
@@ -23,10 +23,10 @@ router.post('/', async (req, res) => {
         res.status(400).send({ error: 'Input value cannot be empty or contain only whitespaces' });
     }
 
-});
+}) as RequestHandler);
 
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', (async (req, res) => {
     try {
         const updatedTodo = await todoService.updateTodo(req.params.id, req.body);
         res.status(200).send(updatedTodo);
@@ -34,10 +34,10 @@ router.put('/:id', async (req, res) => {
     catch (error) {
         res.status(400).send({ error: 'Something went wrong here!' });
     }
-});
+}) as RequestHandler);
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', (async (req, res) => {
     try {
         const result = await todoService.deleteTodo(req.params.id);
 
@@ -46,6 +46,6 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 
-});
+}) as RequestHandler);
 
 export default router;

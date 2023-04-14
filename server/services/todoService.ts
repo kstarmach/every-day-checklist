@@ -8,7 +8,7 @@ const getAllTodos = async (): Promise<Todo[]> => {
     return todos;
 };
 
-const getTodoById = async (id: string): Promise<Todo| string> => {
+const getTodoById = async (id: string): Promise<Todo | string> => {
     const todo = await TodoModel.findById(id);
     return todo || 'Todo not found!';
 };
@@ -20,7 +20,7 @@ const addTodo = async (newTodo: NewTodo): Promise<Todo> => {
     return todo;
 };
 
-const updateTodo = async (id: string, todo: any): Promise<Todo | string> => {
+const updateTodo = async (id: string, todo: NewTodo): Promise<Todo | string> => {
     try {
         todo.updateDate = new Date();
         const updatedTodo = await TodoModel.findByIdAndUpdate(id, todo, { new: true });

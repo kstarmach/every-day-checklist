@@ -26,7 +26,7 @@ const todoSchema = new Schema<Todo>({
 });
 
 todoSchema.set('toJSON', {
-    transform: (_document: any, returnedObject: TodoDocument) => {
+    transform: (_document: unknown, returnedObject: TodoDocument) => {
         returnedObject.id = returnedObject._id ? returnedObject._id.toString() : '';
         delete returnedObject._id;
         delete returnedObject.__v;

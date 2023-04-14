@@ -25,7 +25,7 @@ const todoInDb = async () => {
     return todos;
 };
 
-module.exports = {
+export default {
     initialTodos,
     todoInDb
 };

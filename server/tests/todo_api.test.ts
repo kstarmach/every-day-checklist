@@ -1,12 +1,13 @@
+/* eslint-disable */
 const mongoose = require('mongoose');
-const supertest = require('supertest');
+import supertest from 'supertest';
 // const app = require('../app')
 import app from '../app';
 
 const api = supertest(app);
 
 import TodoModel from "../models/todo";
-const helper = require('./test_helper');
+import helper from './test_helper';
 
 beforeEach(async () => {
     await TodoModel.deleteMany();
