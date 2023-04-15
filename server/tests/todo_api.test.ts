@@ -74,16 +74,20 @@ describe('HTTP PUT', () => {
     test('succesfully updating status return updated todo', async () => {
         const todosAtStart = await helper.todoInDb();
         const firstTodo = todosAtStart[0];
-        firstTodo.done = !firstTodo.done;
+
+        const todoToUpdate = {
+            text: firstTodo.text,
+            done: !firstTodo.done
+        }
 
         const response = await api
             .put(`/api/todos/${firstTodo.id}`)
-            .send(firstTodo)
+            .send(todoToUpdate)
             .expect(200);
 
 
         expect(response.body.text).toEqual("My first task");
-        expect(response.body.done).toBe(true);
+        expect(response.body.done).toBe(!firstTodo.done);
     });
 });
 

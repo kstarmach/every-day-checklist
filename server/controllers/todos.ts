@@ -15,7 +15,7 @@ router.get('/:id', (async (req, res) => {
 
 router.post('/', (async (req, res) => {
     try {
-        const newTodo = toNewTodo(req.body);
+        const newTodo = toNewTodo({ text: req.body.text, done: req.body.done });
         const addTodo = await todoService.addTodo(newTodo);
         res.json(addTodo);
     }
@@ -28,7 +28,9 @@ router.post('/', (async (req, res) => {
 
 router.put('/:id', (async (req, res) => {
     try {
-        const updatedTodo = await todoService.updateTodo(req.params.id, req.body);
+        const todo = toNewTodo({ text: req.body.text, done: req.body.done });
+
+        const updatedTodo = await todoService.updateTodo(req.params.id, todo);
         res.status(200).send(updatedTodo);
     }
     catch (error) {
