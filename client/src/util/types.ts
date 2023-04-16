@@ -3,6 +3,10 @@ export interface NewTodo {
     done: boolean;
 }
 
+export interface UpdateTodo extends NewTodo {
+    id: string;
+}
+
 export interface Todo extends NewTodo {
     id: string;
     order?: number;
@@ -12,6 +16,10 @@ export interface Todo extends NewTodo {
 
 export interface ListProps {
     todos: Todo[];
-    updateTodo: (values: { id: string; text: string; done: boolean }) => void;
+    updateTodo: (values: UpdateTodo) => void;
     deleteTodo: (values: { id: string }) => void;
+}
+
+export interface SingleTodo extends Omit<ListProps, "todos"> {
+    todo: Todo
 }

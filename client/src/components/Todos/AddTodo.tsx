@@ -18,8 +18,8 @@ const AddTodo = ({ createTodo }: { createTodo: (values: NewTodo) => void }) => {
     }
 
 
-    const handleSubmit = () => {
-        // e.preventDefault()
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
         createTodo({
             text,
             done: false
@@ -27,7 +27,7 @@ const AddTodo = ({ createTodo }: { createTodo: (values: NewTodo) => void }) => {
         setText('')
     }
 
-    const pattern = new RegExp(".*\\S+.*")
+
     return (
 
         <Paper
@@ -44,7 +44,10 @@ const AddTodo = ({ createTodo }: { createTodo: (values: NewTodo) => void }) => {
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Add a task"
-                inputProps={{ 'aria-label': 'Add a task', pattern }}
+                inputProps={{
+                    'aria-label': 'Add a task',
+                    pattern: '.*\\S+.*',
+                }}
                 onChange={onChange}
                 value={text}
                 required
