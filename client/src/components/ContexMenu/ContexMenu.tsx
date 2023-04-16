@@ -12,7 +12,7 @@ import MenuList from '@mui/material/MenuList';
 import Typography from '@mui/material/Typography';
 import ContentCopy from '@mui/icons-material/ContentCopy';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import AlertDialog from './AlertDialog';
+import AlertDialog from '../Alert/AlertDialog';
 import { Todo } from '../../util/types';
 
 interface MenuProps {
@@ -21,9 +21,43 @@ interface MenuProps {
     deleteTodo: (value: Todo) => void;
     handleCloseContextMenu: () => void;
 }
+
+const MenuItemElement = () => {
+    return (
+        <>
+            <MenuItem>
+                <ListItemIcon>
+                    <EditIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Edit</ListItemText>
+                <Typography variant="body2" color="text.secondary">
+                    ⌘X
+                </Typography>
+            </MenuItem>
+            <MenuItem>
+                <ListItemIcon>
+                    <ContentCopy fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Copy</ListItemText>
+                <Typography variant="body2" color="text.secondary">
+                    ⌘C
+                </Typography>
+            </MenuItem>
+            <MenuItem>
+                <ListItemIcon>
+                    <ArchiveIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Archive</ListItemText>
+                <Typography variant="body2" color="text.secondary">
+                    ⌘V
+                </Typography>
+            </MenuItem>
+        </>
+    )
+}
+
 const ContextMenu = ({ todo, updateTodo, deleteTodo, handleCloseContextMenu }: MenuProps) => {
     const [open, setOpen] = useState(false)
-
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -42,8 +76,6 @@ const ContextMenu = ({ todo, updateTodo, deleteTodo, handleCloseContextMenu }: M
     const handleSetComplete = () => {
         updateTodo(todo)
     }
-
-
 
     return (
         <>
@@ -64,33 +96,7 @@ const ContextMenu = ({ todo, updateTodo, deleteTodo, handleCloseContextMenu }: M
                     </MenuItem>
                 }
                 <Divider />
-                <MenuItem>
-                    <ListItemIcon>
-                        <EditIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Edit</ListItemText>
-                    <Typography variant="body2" color="text.secondary">
-                        ⌘X
-                    </Typography>
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon>
-                        <ContentCopy fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Copy</ListItemText>
-                    <Typography variant="body2" color="text.secondary">
-                        ⌘C
-                    </Typography>
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon>
-                        <ArchiveIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Archive</ListItemText>
-                    <Typography variant="body2" color="text.secondary">
-                        ⌘V
-                    </Typography>
-                </MenuItem>
+                <MenuItemElement />
                 <Divider />
                 <MenuItem sx={{ color: 'red' }} onClick={handleClickOpen}>
                     <ListItemIcon sx={{ color: 'red' }}>
