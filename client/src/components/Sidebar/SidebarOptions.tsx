@@ -10,7 +10,7 @@ import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import UserInfo from './UserInfo';
 import SearchInput from './SearchInput';
 
-const ListItemOptionIcon = ({ name }) => {
+const ListItemOptionIcon = ({ name }: { name: string }) => {
 
     if (name === 'Statistics') {
         return <AnalyticsOutlinedIcon />
@@ -20,7 +20,13 @@ const ListItemOptionIcon = ({ name }) => {
 
 }
 
-const ListItemOption = ({ name, idx, isactive }) => {
+interface ItemOptions {
+    name: string;
+    idx: string;
+    isactive: boolean;
+}
+
+const ListItemOption = ({ name, idx, isactive }: ItemOptions) => {
 
     return (
         <ListItem key={idx} disablePadding selected={isactive}>
@@ -42,7 +48,7 @@ const SidebarOptions = () => {
             <List>
                 <ListItemOption name={'My Day'} idx='1' isactive={true} />
                 <Divider />
-                <ListItemOption name={'Statistics'} idx='2' active={false} />
+                <ListItemOption name={'Statistics'} idx='2' isactive={false} />
             </List>
         </>
     )

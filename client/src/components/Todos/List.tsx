@@ -1,10 +1,11 @@
+import { ListProps } from "../../util/types"
 import Todo from "./Todo"
 
-const List = ({ todos, updateTodo, deleteTodo }) => {
+const List = ({ todos, updateTodo, deleteTodo }: ListProps) => {
     return (
         <>
             {todos.map((todo) => {
-                return (<Todo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} key={todo.id}/>)
+                return (<Todo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} key={todo.id} />)
             })}
         </>
     )

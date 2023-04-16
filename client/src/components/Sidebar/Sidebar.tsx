@@ -5,15 +5,15 @@ import { useState } from 'react';
 import SidebarOptions from './SidebarOptions';
 const drawerWidth = 300;
 
-const Sidebar = (props) => {
-    const { window } = props;
+const Sidebar = () => {
+    // const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    // const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
         <Box
@@ -22,7 +22,7 @@ const Sidebar = (props) => {
             aria-label="mailbox folders"
         >
             <Drawer
-                container={container}
+                // container={container}
                 variant="temporary"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}

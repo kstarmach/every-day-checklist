@@ -3,12 +3,13 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
+import { NewTodo } from '../../util/types';
 
-const AddTodo = ({ createTodo }) => {
+const AddTodo = ({ createTodo }: { createTodo: (values: NewTodo) => void }) => {
     const [text, setText] = useState('')
 
-    const onChange = ({ target }) => {
-        const value = target.value
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
         if (!value.trim()) {
             setText('')
             return;
@@ -17,12 +18,16 @@ const AddTodo = ({ createTodo }) => {
     }
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        createTodo({ text })
+    const handleSubmit = () => {
+        // e.preventDefault()
+        createTodo({
+            text,
+            done: false
+        })
         setText('')
     }
 
+    const pattern = new RegExp(".*\\S+.*")
     return (
 
         <Paper
@@ -39,12 +44,10 @@ const AddTodo = ({ createTodo }) => {
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Add a task"
-                inputProps={{ 'aria-label': 'Add a task' }}
+                inputProps={{ 'aria-label': 'Add a task', pattern }}
                 onChange={onChange}
                 value={text}
                 required
-                pattern=".*\S+.*"
-    
             />
         </Paper>
 

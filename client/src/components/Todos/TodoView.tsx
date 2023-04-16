@@ -6,21 +6,22 @@ import { Box } from "@mui/material"
 import Calendar from "./Calendar"
 
 import DoneList from "./DoneList"
+import { NewTodo, Todo } from "../../util/types"
 
 const TodoView = () => {
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState<Todo[]>([])
 
     const getTodos = async () => {
         const { data } = await axios.get('/todos')
         setTodos(data)
     }
 
-    const createTodo = async (todo) => {
+    const createTodo = async (todo: NewTodo) => {
         const { data } = await axios.post('/todos', todo)
         setTodos([...todos, data])
     }
 
-    const updateTodo = async (todo) => {
+    const updateTodo = async (todo: { id: string; text: string; done: boolean }) => {
         await axios.put(`/todos/${todo.id}`, {
             text: todo.text,
             done: !todo.done
@@ -28,7 +29,7 @@ const TodoView = () => {
         getTodos()
     }
 
-    const deleteTodo = async (todo) => {
+    const deleteTodo = async (todo: { id: string }) => {
         await axios.delete(`/todos/${todo.id}`)
         getTodos()
     }
