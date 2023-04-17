@@ -17,7 +17,7 @@ export interface Todo extends NewTodo {
 export interface ListProps {
     todos: Todo[];
     updateTodo: (values: UpdateTodo) => void;
-    deleteTodo: (values: { id: string }) => void;
+    deleteTodo: (id: string ) => void;
 }
 
 export interface SingleTodo extends Omit<ListProps, "todos"> {

@@ -7,7 +7,7 @@ import { useState } from 'react';
 interface MenuProps {
     todo: Todo
     updateTodo: (value: Todo) => void;
-    deleteTodo: (value: Todo) => void;
+    deleteTodo: (id:string) => void;
     handleCloseContextMenu: () => void;
 }
 
@@ -23,7 +23,7 @@ const ContextMenu = ({ todo, updateTodo, deleteTodo, handleCloseContextMenu }: M
     };
 
     const handleDelete = () => {
-        deleteTodo(todo)
+        deleteTodo(todo.id)
         setOpen(false);
         handleCloseContextMenu()
     }
