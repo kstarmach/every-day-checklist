@@ -41,9 +41,11 @@ const ContextMenu = ({ todo, updateTodo, deleteTodo, handleCloseContextMenu }: M
             />
             <AlertDialog
                 open={open}
-                taskName={todo.text}
+                title={"Delete task?"}
+                description={`Task "${todo.text}" will be deleted pernamently!`}
+                buttonColor='error'
                 handleClose={handleClose}
-                handleDelete={handleDelete}
+                handleClick={handleDelete}
             />
         </>
     )

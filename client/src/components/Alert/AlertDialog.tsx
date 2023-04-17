@@ -1,4 +1,4 @@
-import Button from '@mui/material/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -6,13 +6,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 interface AlertProps {
-    handleClose: () => void;
     open: boolean;
-    taskName: string;
-    handleDelete: () => void;
+    title: string;
+    description: string;
+    buttonColor?: ButtonProps['color'];
+    handleClose: () => void;
+    handleClick: () => void;
 }
 
-const AlertDialog = ({ handleClose, open, taskName, handleDelete }: AlertProps) => {
+const AlertDialog = ({ open, title, description, buttonColor, handleClick, handleClose }: AlertProps) => {
 
 
     return (
@@ -24,15 +26,15 @@ const AlertDialog = ({ handleClose, open, taskName, handleDelete }: AlertProps) 
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Delete task?"}
+                    {title}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Task &quor;{taskName}&quor; will be deleted pernamently!
+                        {description}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleDelete} color={'error'}>Delete</Button>
+                    <Button onClick={handleClick} color={buttonColor}>Delete</Button>
                     <Button onClick={handleClose} autoFocus>
                         Cancel
                     </Button>
