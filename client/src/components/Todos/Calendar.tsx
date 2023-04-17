@@ -4,19 +4,10 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import IconButton from '@mui/material/IconButton'
 import { useState } from 'react'
+import daysOfWeek from '../../utils'
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date())
-
-  const daysOfWeek = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ]
 
   const handlePrevDay = () => {
     const newDate = new Date(date)

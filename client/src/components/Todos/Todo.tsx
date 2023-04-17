@@ -1,7 +1,7 @@
 import { ListItem, ListItemButton, ListItemIcon, ListItemText, Checkbox, Paper, Menu } from '@mui/material'
 import { useState, MouseEvent } from 'react'
 import ContextMenu from '../ContexMenu/ContexMenu'
-import { SingleTodo } from '../../util/types'
+import { SingleTodo } from '../../utils/types'
 
 interface ContextMenuPosition {
     mouseX: number;

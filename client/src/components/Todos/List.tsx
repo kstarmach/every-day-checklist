@@ -1,4 +1,4 @@
-import { ListProps } from "../../util/types"
+import { ListProps } from "../../utils/types"
 import Todo from "./Todo"
 
 const List = ({ todos, updateTodo, deleteTodo }: ListProps) => {

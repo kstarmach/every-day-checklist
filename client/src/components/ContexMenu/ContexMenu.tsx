@@ -1,5 +1,5 @@
 import AlertDialog from '../Alert/AlertDialog';
-import { Todo } from '../../util/types';
+import { Todo } from '../../utils/types';
 
 import MenuOptions from './MenuOptions';
 import { useState } from 'react';

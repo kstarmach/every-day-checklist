@@ -6,7 +6,7 @@ import { Box } from "@mui/material"
 import Calendar from "./Calendar"
 
 import DoneList from "./DoneList"
-import { NewTodo, Todo } from "../../util/types"
+import { NewTodo, Todo } from "../../utils/types"
 
 const TodoView = () => {
     const [todos, setTodos] = useState<Todo[]>([])

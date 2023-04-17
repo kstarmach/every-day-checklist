@@ -3,7 +3,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useState } from 'react';
 import Todo from "./Todo"
-import { ListProps } from '../../util/types';
+import { ListProps } from '../../utils/types';
 
 const DoneList = ({ todos, updateTodo, deleteTodo }: ListProps) => {
     const [show, setShow] = useState(false)

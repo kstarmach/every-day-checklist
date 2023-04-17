@@ -3,7 +3,7 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
-import { NewTodo } from '../../util/types';
+import { NewTodo } from '../../utils/types';
 
 const AddTodo = ({ createTodo }: { createTodo: (values: NewTodo) => void }) => {
     const [text, setText] = useState('')
