@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import { NewTodo } from '../../utils/types';
+import {  ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 const AddTodo = ({ createTodo }: { createTodo: (values: NewTodo) => void }) => {
     const [text, setText] = useState('')
@@ -29,31 +30,46 @@ const AddTodo = ({ createTodo }: { createTodo: (values: NewTodo) => void }) => {
 
 
     return (
-
         <Paper
-            component="form"
-            // sx={{ display: 'flex', alignItems: 'center', width: '100%' }}
-            // sx={{ position: 'absolute', bottom: 0, marginBottom: '10px' }}
-            onSubmit={handleSubmit}
             elevation={3}
+            sx={{ marginBottom: '5px' }}
+            component={'form'}
+            onSubmit={handleSubmit}
         >
-            <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions" type='submit'>
-                <AddIcon />
-            </IconButton>
+            <ListItem disablePadding>
+                <ListItemButton
+                    role={undefined}
+                    dense
+                    style={{ cursor: 'context-menu' }}
+                >
+                               <ListItemIcon >
+                        <IconButton color="primary" aria-label="directions" type='submit' sx={{ padding: 0}}>
+                            <AddIcon />
+                        </IconButton>
+                    </ListItemIcon>
+                    <ListItemText
+                        sx={{
+                            // fontSize: 34,
+                            fontWeight: 'medium',
+                        }}
+                    >
+                        <InputBase
+                            sx={{ width: '100%' }}
+                            placeholder="Add a task"
+                            inputProps={{
+                                'aria-label': 'Add a task',
+                                pattern: '.*\\S+.*',
+                            }}
+                            onChange={onChange}
+                            value={text}
+                            required
+                        />
+                    </ListItemText>
 
-            <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Add a task"
-                inputProps={{
-                    'aria-label': 'Add a task',
-                    pattern: '.*\\S+.*',
-                }}
-                onChange={onChange}
-                value={text}
-                required
-            />
+         
+                </ListItemButton>
+            </ListItem>
         </Paper>
-
     )
 }
 
