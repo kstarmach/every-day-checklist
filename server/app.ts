@@ -2,17 +2,21 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import todosRouter from './controllers/todos';
-// import config from './utils/config'
+import config from './utils/config';
 
 const app = express();
-const temp_mongo_uri = 'mongodb+srv://starmil:MgHptFdpr2D0NtRg@cluster0.exzlqd2.mongodb.net/todoApp?retryWrites=true&w=majority';
-mongoose.connect(temp_mongo_uri)
-    .then(() => {
-        console.log('connected to MongoDB');
-    })
-    .catch((error) => {
-        console.error('error connecting to MongoDB', error.message);
-    });
+
+if (config.MONGODB_URL) {
+    mongoose.connect(config.MONGODB_URL)
+        .then(() => {
+            console.log('connected to MongoDB');
+        })
+        .catch((error) => {
+            console.error('error connecting to MongoDB', error.message);
+        });
+} else {
+    console.error('MONGODB_URL not found!');
+}
 
 app.use(cors());
 app.use(express.json());
