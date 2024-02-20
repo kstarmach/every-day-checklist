@@ -48,9 +48,8 @@ const TodoView = () => {
 
             <AddTodo createTodo={createTodo} />
             <br />
-            <List todos={todos.filter(todo => !todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
-
-            <DoneList todos={todos.filter(todo => todo.done)} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+            <List todos={Array.isArray(todos) ? todos.filter(todo => !todo.done) : []} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+            <DoneList todos={Array.isArray(todos) ? todos.filter(todo => todo.done) : []} updateTodo={updateTodo} deleteTodo={deleteTodo} />
 
         </Box>
     )
